@@ -33,21 +33,21 @@ export default function TransactionCard() {
   ];
 
   return (
-    <section className="grid grid-cols-3 gap-4 w-full my-6">
+    <section className="grid grid-cols-3 gap-4 w-full">
       {cardInfo.map((info, index) => {
         return (
           <div
             key={index}
-            className="min-h-18 flex items-center bg-surface border border-gray-200 rounded-2xl"
+            className="flex items-center bg-surface border border-gray-200 rounded-2xl p-4 gap-6"
           >
             <div
-              className={`m-6 ${info.gradient} text-background text-3xl min-w-16 min-h-16 rounded-2xl flex items-center justify-center shadow`}
+              className={`${info.gradient} text-background text-2xl rounded-2xl flex items-center justify-center shadow w-18 h-18`}
             >
               <FontAwesomeIcon icon={info.icon} className="relative" />
             </div>
             <span>
-              <p>{info.title}</p>
-              <strong className="text-3xl">{info.description}</strong>
+              <p >{info.title}</p>
+              <strong className="text-xl">{info.description}</strong>
             </span>
           </div>
         );

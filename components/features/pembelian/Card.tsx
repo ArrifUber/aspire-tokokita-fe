@@ -13,16 +13,16 @@ type value = {
 export default function CardPembelian({title, value, icon, gradient, subText, subTextExpenses, changes}: value) {
   return (
     <div
-      className="min-h-20 flex items-center bg-surface border border-gray-200 rounded-2xl shadow"
+      className="flex items-center bg-surface border border-gray-200 rounded-2xl shadow p-4 gap-6"
     >
       <div
-        className={`m-6 ${gradient} text-background text-3xl min-w-20 min-h-20 rounded-3xl flex items-center justify-center shadow`}
+        className={`${gradient} text-background text-3xl w-18 h-18 rounded-2xl flex items-center justify-center shadow`}
       >
         <Icon icon={icon}/>
       </div>
       <span>
-        <p className="text-md">{title}</p>
-        <strong className="text-2xl">{value}</strong>
+        <p className="text-lg">{title}</p>
+        <strong className="text-xl">{value}</strong>
 
         {subTextExpenses ? 
           <div className={`flex gap-1 text-bold ${changes == 'up' ? 'text-red-800' : 'text-green-800'}`}>

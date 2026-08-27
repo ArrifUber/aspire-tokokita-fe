@@ -16,10 +16,9 @@ export interface TransactionDetail {
 export interface Transaction {
   id?: string;
   userId: string;
-  companyId?: string;
   customerName?: string;
   totalPrice: number;
-  status: 'PENDING' | 'COMPLETED' | 'CANCELLED';
+  status: 'PENDING' | 'SUCCESS' | 'CANCELLED';
   detail?: TransactionDetail;
   createdAt?: string;
   updatedAt?: string;

@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function RegisterPage() {
+  const role = "OWNER"
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,7 @@ export default function RegisterPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    register({ name, email, password });
+    register({ name, email, password, role });
   }
 
   const [isVisible, setIsVisible] = useState(false);

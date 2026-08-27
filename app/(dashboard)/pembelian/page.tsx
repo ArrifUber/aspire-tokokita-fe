@@ -1,16 +1,16 @@
-import BannerSmall from '@/components/Banner/BannerSmall' 
 import CardPembelian from '@/components/features/pembelian/Card'
 import DropDown from '@/components/Shared/DropDown'
 import { SearchField } from '@heroui/react'
 import DatePicker from '@/components/Shared/DatePicker'
 import Link from 'next/link'
 import TabelPembelian from '@/components/features/pembelian/Table'
+import NavBanner from '@/components/Shared/NavBanner'
 
 export default function Pembelian() {
   return (
     <>
-    <BannerSmall title='Pembelian' />
 
+ <NavBanner bannerTitle="Pembelian"/>
     <section className="grid grid-cols-3 gap-4 w-full my-6">
       <CardPembelian 
         title='Total pengeluaran' 

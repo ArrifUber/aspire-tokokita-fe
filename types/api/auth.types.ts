@@ -14,6 +14,7 @@ export interface RegisterReq {
   name: string;
   email: string;
   password: string;
+  role: "OWNER";
 }
 
 export interface LoginRes {

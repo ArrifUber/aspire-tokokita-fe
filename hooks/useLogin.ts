@@ -16,6 +16,7 @@ export function useLogin() {
 
     try {
       const data = await loginUser(payload);
+      console.log(data)
       // tokenStorage.set(data.);
       accessTokenStorage.set(data.accessToken)
       refreshTokenStorage.set(data.refreshToken)

@@ -1,15 +1,15 @@
 "use client";
 import TransactionCard from "@/components/Shared/TransactionCard";
-import Transaction from "@/components/features/transaction/index";
-import BannerSmall from "@/components/Banner/BannerSmall";
+import NavBanner from "@/components/Shared/NavBanner";
+import TransactionSection from "@/components/features/transaction/TransactionSection";
+import { useGetAllTransactions } from "@/hooks/transaction/useGetAllTransactions";
 
 export default function Penjualan() {
+   const { error, isLoading, transactions } = useGetAllTransactions();
   return (
-    <>
-      <section>
-        <BannerSmall
-          title="Daftar Transaksi Penujualan"
-        />
+    <div className="w-full flex flex-col gap-4 mx-auto">
+      <section id="navBanner" className="w-full">
+        <NavBanner bannerTitle="Daftar Transaksi Penujualan" />
       </section>
 
       <section>
@@ -17,8 +17,8 @@ export default function Penjualan() {
       </section>
 
       <section>
-        <Transaction />
+        <TransactionSection transaction={isLoading || !transactions ? [] : transactions} />
       </section>
-    </>
+    </div>
   );
 }

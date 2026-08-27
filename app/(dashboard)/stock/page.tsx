@@ -1,8 +1,8 @@
 'use client'
-import BannerSmall from "@/components/Banner/BannerSmall";
 import Filtering from "@/components/features/stok/Filtering";
 import SectionStocks from "@/components/features/stok/NewTable/SectionStock";
 import StockTable from "@/components/features/stok/Table";
+import NavBanner from "@/components/Shared/NavBanner";
 import { useGetAllStock } from "@/hooks/stock/useGetAllStock";
 
 export default function Stok() {
@@ -11,7 +11,7 @@ export default function Stok() {
   return (
     <div className="w-full flex flex-col gap-4 mx-auto">
       <section className="mb-4">
-        <BannerSmall title="Stok Barang" />
+        <NavBanner bannerTitle="Stok Barang"/>
       </section>
 
       <section className="w-full">

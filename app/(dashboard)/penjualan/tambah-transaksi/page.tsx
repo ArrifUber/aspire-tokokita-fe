@@ -1,5 +1,4 @@
 "use client";
-import BannerSmall from      "@/components/Banner/BannerSmall";
 import Combox from           "@/components/features/transaction/tambah-transaksi/Combox";
 import SimpanTransaksi from  '@/components/features/transaction/tambah-transaksi/Modal';
 import PilihTransaksi from   '@/components/features/transaction/tambah-transaksi/PilihTransaksi';
@@ -29,6 +28,7 @@ import { useState } from     "react";
 import ProdukDrawer from "@/components/features/transaction/tambah-transaksi/Drawer";
 import { ProdukType, SelectProductType } from '@/components/features/transaction/tambah-transaksi/Props/ProdukProps'
 import clsx from 'clsx'
+import NavBanner from "@/components/Shared/NavBanner";
 
 export default function TambahTransaksi() {
   const [metode, setMetode] = useState<Key | null>();
@@ -81,7 +81,7 @@ export default function TambahTransaksi() {
 
   return (
     <div>
-      <BannerSmall title="Tambah Transaksi"></BannerSmall>
+      <NavBanner bannerTitle="Tambah Transaksi"/>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">    
 
         {/* left side */}
