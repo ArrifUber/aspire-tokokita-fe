@@ -23,7 +23,7 @@ export default function BottomCard() {
   const router = useRouter()
 
   return (
-    <>
+    <div className="mt-auto">
       <Dropdown isOpen={isOpen} onOpenChange={setIsOpen}>
         <Button
           variant="primary"
@@ -37,7 +37,7 @@ export default function BottomCard() {
             <h3 className="text-sm font-semibold truncate">
               {userData?.name || "Anomali"}
             </h3>
-            <p className="text-xs">Pemilik</p>
+            <p className="text-xs lowercase first-letter:uppercase">{userData?.role}</p>
           </div>
           <div className="flex-none">
             <FontAwesomeIcon icon={faEllipsisVertical} size="lg" />
@@ -69,6 +69,6 @@ export default function BottomCard() {
         </Dropdown.Popover>
       </Dropdown>
     <LogoutAlertDialog isOpen={isLogoutAlertOpen} setIsOpen={setIsLogoutAlertOpen}/>
-    </>
+    </div>
   );
 }

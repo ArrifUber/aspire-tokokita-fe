@@ -64,8 +64,8 @@ export default function ProfileDetailSection() {
           <p className="text-xl font-semibold text-foreground">
             {user.name}
           </p>
-          <span className="w-fit text-sm font-medium px-2 py-0.5 rounded-full bg-primary-100 text-primary-700">
-            Pemilik
+          <span className="w-fit text-sm font-medium px-2 py-0.5 rounded-md bg-primary-100 text-primary-700 lowercase first-letter:capitalize">
+            {user.role}
           </span>
         </div>
       </div>
@@ -77,11 +77,11 @@ export default function ProfileDetailSection() {
         <p className="text-lg font-semibold text-muted">Informasi Akun</p>
 
         <InfoRow label="Nama" value={user.name} >
-          <EditAccountModal defaultEmail={user.email} defaultName={user.name} trigger={<FontAwesomeIcon icon={faPencil}  />} />
+          <EditAccountModal defaultName={user.name} trigger={<FontAwesomeIcon icon={faPencil}  />} />
         </InfoRow>
 
         <InfoRow label="Email" value={user.email}>
-          <EditAccountModal defaultEmail={user.email} defaultName={user.name} trigger={<FontAwesomeIcon icon={faPencil} />} />
+          <></>
         </InfoRow>
       </div>
 

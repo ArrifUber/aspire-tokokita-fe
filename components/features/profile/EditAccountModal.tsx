@@ -13,31 +13,27 @@ import React, { useEffect, useState } from "react";
 interface EditAccountModalProps {
   trigger: React.ReactNode;
   defaultName: string;
-  defaultEmail: string;
 }
 
 export default function EditAccountModal({
   trigger,
-  defaultEmail,
   defaultName,
 }: EditAccountModalProps) {
   const state = useOverlayState();
   const { updateProfile, isLoading, error, clearError } = useUpdateProfile();
 
   const [name, setName] = useState(defaultName);
-  const [email, setEmail] = useState(defaultEmail);
 
   useEffect(() => {
     if (state.isOpen) {
       setName(defaultName);
-      setEmail(defaultEmail);
       clearError();
     }
   }, [state.isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const success = await updateProfile({ name, email });
+    const success = await updateProfile({ name });
     if (success) {
       state.close();
     }
@@ -61,15 +57,6 @@ export default function EditAccountModal({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Nama lengkap"
-                  />
-                </TextField>
-                <TextField>
-                  <Label>Email</Label>
-                  <Input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="nama@email.com"
                   />
                 </TextField>
               </Modal.Body>

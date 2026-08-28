@@ -1,28 +1,10 @@
-'use client'
-// import { tokenStorage } from "@/lib/storage";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-    const router = useRouter();
-  const [isChecking, setIsChecking] = useState(true);
-
-  // useEffect(() => {
-  //   const token = tokenStorage.get();
-  //   if (token) {
-  //     router.push('/'); 
-  //   } else {
-  //     setTimeout(() => {
-  //       setIsChecking(false);
-  //     }, 0)
-  //   }
-  // }, [router]);
-
-  // if (isChecking) return null;
 
   return (
     <div className="flex w-full items-center justify-center p-4">
