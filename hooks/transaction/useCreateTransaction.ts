@@ -4,7 +4,10 @@ import { SWR_KEYS } from "@/lib/swr-keys";
 import { useState } from "react";
 import { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
-import { CreateTransactionReq } from "@/types/api/transaction.types";
+import {
+  CreateTransactionReq,
+  TransactionResponse,
+} from "@/types/api/transaction.types";
 
 export function useCreateTransaction() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -16,22 +19,25 @@ export function useCreateTransaction() {
     reset,
   } = useSWRMutation(
     SWR_KEYS.transaction.all,
-    (_key: string, { arg: payload }: { arg: CreateTransactionReq }) => createTransaction(payload),
+    (_key: string, { arg: payload }: { arg: CreateTransactionReq }) =>
+      createTransaction(payload),
   );
 
   const clearError = () => reset();
   const clearSuccess = () => setIsSuccess(false);
 
-  async function postTransaction(payload: CreateTransactionReq) {
+  async function postTransaction(
+    payload: CreateTransactionReq,
+  ): Promise<TransactionResponse | null> {
     setIsSuccess(false);
 
     try {
-      await trigger(payload);
+      const result = await trigger(payload);
       setIsSuccess(true);
       mutate(SWR_KEYS.transaction.all);
-      return true;
+      return result;
     } catch {
-      return false;
+      return null;
     }
   }
 

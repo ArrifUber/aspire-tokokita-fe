@@ -1,25 +1,30 @@
 import { ApiResponse } from "@/types/api/base.types";
 import {
-  Transaction,
   CreateTransactionReq,
   UpdateTransactionReq,
+  TransactionResponse,
 } from "@/types/api/transaction.types";
 import { apiClient } from "./client";
 
-export async function getAllTransactions(): Promise<Transaction[]> {
-  const res = await apiClient.get<ApiResponse<Transaction[]>>("/transactions");
+export async function getAllTransactions(): Promise<TransactionResponse[]> {
+  const res =
+    await apiClient.get<ApiResponse<TransactionResponse[]>>("/transactions");
   return res.data.data;
 }
 
-export async function getTransactionById(id: string): Promise<Transaction> {
-  const res = await apiClient.get<ApiResponse<Transaction>>(`/transactions/${id}`);
+export async function getTransactionById(
+  id: string,
+): Promise<TransactionResponse> {
+  const res = await apiClient.get<ApiResponse<TransactionResponse>>(
+    `/transactions/${id}`,
+  );
   return res.data.data;
 }
 
 export async function createTransaction(
   payload: CreateTransactionReq,
-): Promise<Transaction> {
-  const res = await apiClient.post<ApiResponse<Transaction>>(
+): Promise<TransactionResponse> {
+  const res = await apiClient.post<ApiResponse<TransactionResponse>>(
     "/transactions",
     payload,
   );
@@ -29,8 +34,8 @@ export async function createTransaction(
 export async function updateTransaction({
   id,
   payload,
-}: UpdateTransactionReq): Promise<Transaction> {
-  const res = await apiClient.put<ApiResponse<Transaction>>(
+}: UpdateTransactionReq): Promise<TransactionResponse> {
+  const res = await apiClient.put<ApiResponse<TransactionResponse>>(
     `/transactions/${id}`,
     payload,
   );

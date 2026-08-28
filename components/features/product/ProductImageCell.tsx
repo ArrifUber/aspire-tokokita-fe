@@ -17,7 +17,7 @@ export default function ProductImageCell({ filename }: ProductImageCellProps) {
     // Fallback kalau produk belum punya gambar / gagal fetch
     return (
     <img
-      src="image-placeholder.png"
+      src="/image-placeholder.png"
       alt="product-image"
       className="w-full h-full object-cover"
     />
