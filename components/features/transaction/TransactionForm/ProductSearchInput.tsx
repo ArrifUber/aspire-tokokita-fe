@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { Search } from "lucide-react";
-import { ProductsWithCategoryName } from "@/types/api/product.types";
+import { Product } from "@/types/api/product.types";
 import { formatPrice } from "@/lib/formatPrice";
 import ProductImageCell from "../../product/ProductImageCell";
 
@@ -17,9 +17,9 @@ export interface ProductSearchInputHandle {
 }
 
 interface ProductSearchInputProps {
-  products: ProductsWithCategoryName[];
+  products: Product[];
   isLoadingProducts: boolean;
-  onSelectProduct: (product: ProductsWithCategoryName) => void;
+  onSelectProduct: (product: Product) => void;
 }
 
 export const ProductSearchInput = forwardRef<
@@ -48,7 +48,7 @@ export const ProductSearchInput = forwardRef<
       .slice(0, 6);
   }, [query, products]);
 
-  function handleSelect(product: ProductsWithCategoryName) {
+  function handleSelect(product: Product) {
     onSelectProduct(product);
     setQuery("");
   }

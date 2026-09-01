@@ -7,17 +7,11 @@ import ProductImageCell from "./ProductImageCell";
 
 
 
-// export interface ProductExt extends Product {
-//   status: "aktif" | "tidak aktif";
-// }
 
-// const statusColorMap: Record<
-//   ProductExt["status"],
-//   "success" | "warning" | "danger"
-// > = {
-//   aktif: "success",
-//   "tidak aktif": "danger",
-// };
+const statusColorMap: { [K in Product["isActive"]]: "success" | "warning" } = {
+  true: "success",
+  false: "danger",
+};
 
 export const productColumns: ColumnDef<Product>[] = [
   {
@@ -58,20 +52,20 @@ export const productColumns: ColumnDef<Product>[] = [
   { key: "sellPrice", label: "Harga Jual", minWidth: 140, renderCell: (row) => (
     <p>{formatPrice(row.sellPrice)}</p>
   )},
-  // {
-  //   key: "status",
-  //   label: "Status",
-  //   minWidth: 110,
-  //   renderCell: (row) => (
-  //     <Chip
-  //       color={statusColorMap[row.status]}
-  //       variant="soft"
-  //       className="rounded-md capitalize"
-  //     >
-  //       {row.status}
-  //     </Chip>
-  //   ),
-  // },
+  {
+    key: "status",
+    label: "Status",
+    minWidth: 110,
+    renderCell: (row) => (
+      <Chip
+        color={statusColorMap[row.isActive]}
+        variant="soft"
+        className="rounded-md capitalize"
+      >
+        {row.isActive ? "Aktif" : "Nonaktif"}
+      </Chip>
+    ),
+  },
   {
     key: "aksi",
     label: "Aksi",

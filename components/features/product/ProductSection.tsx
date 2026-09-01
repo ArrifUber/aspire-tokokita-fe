@@ -7,15 +7,15 @@ import { ReusableTable } from "@/components/Shared/ReusableTable";
 import { productColumns } from "./product.columns";
 import TableSearchField from "../../Shared/TableSearchField";
 import SelectList, { createList } from "@/components/Shared/SelectList";
-import { ProductsWithCategoryName } from "@/types/api/product.types";
+import { Product } from "@/types/api/product.types";
 import Link from "next/link";
 
 
-export default function ProductSection({ products }: { products: ProductsWithCategoryName[] }) {
+export default function ProductSection({ products }: { products: Product[] }) {
   const { currentData, pagination } = usePagination({
     data: products,
     rowsPerPage: 5,
-    itemLabel: "supplier",
+    itemLabel: "produk",
   });
 
   const CategoriesList = createList([

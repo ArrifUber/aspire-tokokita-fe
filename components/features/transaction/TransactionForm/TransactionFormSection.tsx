@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useGetAllProduct } from "@/hooks/product/useGetAllProduct"; // sesuaikan path
 import { useCreateTransaction } from "@/hooks/transaction/useCreateTransaction"; // sesuaikan path
 import { CreateTransactionReq } from "@/types/api/transaction.types";
-import { ProductsWithCategoryName } from "@/types/api/product.types";
+import { Product } from "@/types/api/product.types";
 
 import { CustomerInfoCard } from "./CustomerInfoCard";
 import { PaymentSummaryCard } from "./PaymentSummaryCard";
@@ -40,7 +40,7 @@ export default function TransactionFormSection() {
   const { subtotal, totalCapital, totalPrice, totalProfit, effectivePaymentAmount, changeAmount } =
     calculateTransactionTotals({ cartItems, discount, paymentMethod, paymentAmount });
 
-  function addProductToCart(product: ProductsWithCategoryName) {
+  function addProductToCart(product: Product) {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.productId === product.id);
       if (existing) {
@@ -59,7 +59,8 @@ export default function TransactionFormSection() {
           sellPrice: product.sellPrice,
           quantity: 1,
           stock: product.stock,
-          image: product.image
+          image: product.image,
+          categoryName: product.category.name
         },
       ];
     });

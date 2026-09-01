@@ -1,35 +1,53 @@
 export interface Product {
-  id?: string;
-  code?: string;
+  id: string;
+  code: string;
   name: string;
-  image: string | null
   description: string | null;
-  categoryId: string;
+  image: string | null;
+  category: {
+    id: string;
+    name: string;
+  };
   buyPrice: number;
   sellPrice: number;
   stock: number;
-}
-
-export interface ProductsWithCategoryName extends Product{
-  categoryName: string
-}
-
-export interface getAllProductsRes extends Product {
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-export interface createNewProductRes extends Product {
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-export interface getDetailProductRes extends Product {
+  minimumStock: number;
+  isActive: boolean;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface UpdateProductReq {
+export interface CreateProductRequest{
+  name: string
+  description: string | null 
+  image: string | null
+  categoryId: string
+  buyPrice: number
+  sellPrice: number
+  stock: number
+  minimumStock?: number
+}
+
+// export interface UpdateProductRequest extends CreateProductRequest{
+//   isActive: boolean
+// }
+
+// export interface ProductsWithCategoryName extends Product {
+//   categoryName: string;
+// }
+
+// export interface getAllProductsRes extends Product {
+//   createdAt?: string;
+//   updatedAt?: string;
+// }
+
+
+// export interface getDetailProductRes extends Product {
+//   createdAt: string;
+//   updatedAt: string;
+// }
+
+export interface UpdateProductRequest {
   id: string;
   payload: {
     categoryId: string;
@@ -38,5 +56,6 @@ export interface UpdateProductReq {
     stock: number;
     name: string;
     description: string | null;
+    isActive?: boolean
   };
 }

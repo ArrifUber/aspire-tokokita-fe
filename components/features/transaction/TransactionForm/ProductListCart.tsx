@@ -2,16 +2,16 @@
 
 import { useRef } from "react";
 import { Plus } from "lucide-react";
-import { ProductsWithCategoryName } from "@/types/api/product.types";
+import { Product } from "@/types/api/product.types";
 import { ProductSearchInput, ProductSearchInputHandle } from "./ProductSearchInput";
 import { CartItemRow } from "./CartItemRow";
 import { CartItem } from "@/types/transactions/transaction-form.types";
 
 interface ProductListCardProps {
-  products: ProductsWithCategoryName[];
+  products: Product[];
   isLoadingProducts: boolean;
   cartItems: CartItem[];
-  onAddProduct: (product: ProductsWithCategoryName) => void;
+  onAddProduct: (product: Product) => void;
   onIncreaseQuantity: (productId: string) => void;
   onDecreaseQuantity: (productId: string) => void;
   onRemoveItem: (productId: string) => void;

@@ -1,7 +1,7 @@
 import { createNewProduct, updateProduct as updateProductApi } from "@/lib/api/product";
 import { getErrorMessage } from "@/lib/getErrorMessage";
 import { SWR_KEYS } from "@/lib/swr-keys";
-import { Product, UpdateProductReq } from "@/types/api/product.types";
+import { CreateProductRequest, UpdateProductRequest } from "@/types/api/product.types";
 import { useState } from "react";
 import { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
@@ -16,7 +16,7 @@ export function useSaveProduct() {
     reset: resetAddError,
   } = useSWRMutation(
     SWR_KEYS.product.all,
-    (_key: string, { arg }: { arg: Product }) => createNewProduct(arg),
+    (_key: string, { arg }: { arg: CreateProductRequest }) => createNewProduct(arg),
   );
 
   const {
@@ -26,7 +26,7 @@ export function useSaveProduct() {
     reset: resetUpdateError,
   } = useSWRMutation(
     SWR_KEYS.product.all,
-    (_key: string, { arg }: { arg: UpdateProductReq }) => updateProductApi(arg),
+    (_key: string, { arg }: { arg: UpdateProductRequest }) => updateProductApi(arg),
   );
 
   const clearError = () => {
@@ -35,7 +35,7 @@ export function useSaveProduct() {
   };
   const clearSuccess = () => setIsSuccess(false);
 
-  async function addProduct(payload: Product) {
+  async function addProduct(payload: CreateProductRequest) {
     setIsSuccess(false);
     try {
       await triggerAdd(payload);
@@ -47,7 +47,7 @@ export function useSaveProduct() {
     }
   }
 
-  async function updateProduct({ id, payload }: UpdateProductReq) {
+  async function updateProduct({ id, payload }: UpdateProductRequest) {
     setIsSuccess(false);
     try {
       await triggerUpdate({ id, payload });
@@ -60,7 +60,7 @@ export function useSaveProduct() {
     }
   }
 
-  async function saveProduct(payload: Product, productId?: string) {
+  async function saveProduct(payload: CreateProductRequest, productId?: string) {
     if (productId) {
       return updateProduct({ id: productId, payload });
     }
