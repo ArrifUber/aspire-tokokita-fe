@@ -6,9 +6,17 @@ import {
 } from "@/types/api/product.types";
 import { apiClient } from "./client";
 
-export async function getAllProducts(): Promise<Product[]> {
+
+export interface ProductQueryParams {
+  search?: string;
+  categoryId?: string;
+  isActive?: boolean | "";
+  lowStock?: boolean;
+}
+
+export async function getAllProducts(params?: ProductQueryParams): Promise<Product[]> {
   const res =
-    await apiClient.get<ApiResponse<Product[]>>("/products");
+    await apiClient.get<ApiResponse<Product[]>>("/products", {params});
   return res.data.data;
 }
 
@@ -37,6 +45,14 @@ export async function updateProduct({
   const res = await apiClient.put<ApiResponse<Product>>(
     `/products/${id}`,
     payload,
+  );
+  return res.data.data;
+}
+
+// Fitur Soft Delete / Toggle Active Status
+export async function toggleProductStatus(id: string): Promise<Product> {
+  const res = await apiClient.patch<ApiResponse<Product>>(
+    `/products/${id}/toggle`
   );
   return res.data.data;
 }

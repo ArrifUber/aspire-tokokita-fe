@@ -16,6 +16,7 @@ interface PriceFieldsProps {
   setBuyPrice: (value: number) => void;
   form: {
     stock: number;
+    minimumStock: number;
   };
   sellPrice: number;
   setSellPrice: (value: number) => void;
@@ -41,7 +42,7 @@ export default function PriceFields({
           <p className="text-slate-500 text-sm">Atur harga dan stok produk.</p>
         </div>
       </div>
-      <div className="flex gap-4 items-start">
+      <div className="flex gap-4 items-start flex-wrap">
         <FieldContainer>
           <NumberField
             isRequired
@@ -83,6 +84,23 @@ export default function PriceFields({
           </NumberField>
         </FieldContainer>
 
+        <FieldContainer>
+          <NumberField
+            isRequired
+            name="minimumStock"
+            className="w-full "
+            value={form.minimumStock}
+            onChange={updateField("minimumStock")}
+            minValue={1}
+            step={1}
+          >
+            <Label >Minimum Stock</Label>
+            <Input placeholder="Contoh: 5" className="rounded" />
+            <Description>Batas minimum stock, sebelum ditandai menipis.</Description>
+
+            <FieldError />
+          </NumberField>
+        </FieldContainer>
         <FieldContainer>
           <NumberField
             isRequired

@@ -2,7 +2,7 @@
 
 import { faBoxesPacking, faInbox } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { EmptyState, Table } from "@heroui/react";
+import { EmptyState, Spinner, Table } from "@heroui/react";
 import { Pagination } from "@heroui/react";
 
 // Definisi tiap kolom
@@ -31,6 +31,7 @@ interface ReusableTableProps<T extends object> {
   data: T[];
   pagination?: PaginationConfig;
   emptyMessage: string;
+  isLoading?: boolean;
 }
 
 export function ReusableTable<T extends object>({
@@ -38,7 +39,9 @@ export function ReusableTable<T extends object>({
   data,
   pagination,
   emptyMessage,
+  isLoading = false,
 }: ReusableTableProps<T>) {
+  const rows = isLoading ? [] : data;
   return (
     <Table aria-label="Table" className="rounded-none p-0 min-h-[200px]">
       <Table.ResizableContainer>
@@ -65,18 +68,25 @@ export function ReusableTable<T extends object>({
 
           {/* Body */}
           <Table.Body
-            renderEmptyState={() => (
-              <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
-                <FontAwesomeIcon
-                  icon={faBoxesPacking}
-                  size="2xl"
-                  className="text-muted size-6"
-                />
-                <span className="text-sm text-muted">{emptyMessage}</span>
-              </EmptyState>
-            )}
+            renderEmptyState={() =>
+              isLoading ? (
+                <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
+                  <Spinner size="lg" />
+                  <span className="text-sm text-muted">Memuat data...</span>
+                </EmptyState>
+              ) : (
+                <EmptyState className="flex h-full w-full flex-col items-center justify-center gap-4 text-center">
+                  <FontAwesomeIcon
+                    icon={faBoxesPacking}
+                    size="2xl"
+                    className="text-muted size-6"
+                  />
+                  <span className="text-sm text-muted">{emptyMessage}</span>
+                </EmptyState>
+              )
+            }
           >
-            {data.map((row, rowIndex) => (
+            {rows.map((row, rowIndex) => (
               <Table.Row
                 key={rowIndex}
                 className={

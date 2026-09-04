@@ -31,6 +31,7 @@ const EMPTY_FORM_STATE = {
   stock: 0,
   description: "",
   image: null,
+  minimumStock: 0,
 };
 
 interface ProductFormSectionProps {
@@ -57,6 +58,7 @@ export default function ProductFormSection({
     stock: initialData?.stock ?? 0,
     description: initialData?.description ?? "",
     image: initialData?.image ?? null,
+    minimumStock: initialData?.minimumStock ?? 5
   }));
 
   const [imageFile, setImageFile] = useState<File | null>(null);

@@ -17,7 +17,8 @@ export default function ProductPage() {
         {error ? (
           <ErrorProductSection errorMsg={error} />
         ) : (
-          <ProductSection products={isLoading || !products ? [] : products} />
+          // <ProductSection products={isLoading || !products ? [] : products} />
+          <ProductSection/>
         )}
       </section>
     </div>
