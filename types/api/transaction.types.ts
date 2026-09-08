@@ -89,6 +89,9 @@ export interface TransactionResponse {
   userId: string;
   companyId?: string;
   customerName?: string;
+  invoiceNumber: string;
+  invoicePrefix: string;
+  sequenceNumber: number;
   totalPrice: number;
   status: TransactionStatus;
   createdAt: string;

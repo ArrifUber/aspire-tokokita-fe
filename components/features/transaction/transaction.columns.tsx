@@ -1,7 +1,7 @@
 import { ColumnDef } from "@/components/Shared/ReusableTable";
 import { Chip } from "@heroui/react";
 import ActionProductButton from "../product/ActionProductButton";
-import { Transaction } from "@/types/api/transaction.types";
+import { Transaction, TransactionResponse } from "@/types/api/transaction.types";
 import { formatPrice } from "@/lib/formatPrice";
 import {  formatDateShort } from "@/lib/formatDate";
 
@@ -14,7 +14,17 @@ const statusColorMap: Record<
   CANCELLED: "danger",
 };
 
-export const transactionColumn: ColumnDef<Transaction>[] = [
+export const transactionColumn: ColumnDef<TransactionResponse>[] = [
+  {
+    key: "invoiceNumber",
+    label: "No. Invoice",
+    renderCell: (row) => (
+      <div>
+        <p className="font-semibold text-gray-900">{row.invoiceNumber}</p>
+      </div>
+    ),
+    minWidth: 200,
+  },
   {
     key: "createdAt",
     label: "Tanggal",
