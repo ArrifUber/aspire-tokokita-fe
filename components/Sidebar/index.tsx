@@ -42,7 +42,7 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center px-4 py-3 rounded-xl gap-6 transition-all ${
+                className={`capitalize flex items-center px-4 py-3 rounded-xl gap-6 transition-all ${
                   isActive
                     ? "bg-primary-100 text-primary shadow"
                     : "hover:bg-primary-50 hover:text-primary"

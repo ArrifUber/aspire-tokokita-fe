@@ -2,41 +2,54 @@ import { ColumnDef } from "@/components/Shared/ReusableTable";
 import { Chip } from "@heroui/react";
 import ActionProductButton from "../product/ActionProductButton";
 
-export interface Supplier {
+export interface Vendor {
   name: string;
-  pic: string;
-  kategori: string;
   kontak: string;
-  status: "Aktif" | "Pending" | "Nonaktif";
+  rekening: string;
+  noRekening: string;
+  jumlahProduk: string
+  status: "Aktif" | "Nonaktif";
 }
 
-const statusColorMap: Record<Supplier["status"], "success" | "warning" | "danger"> = {
+const statusColorMap: Record<Vendor["status"], "success"  | "danger"> = {
   Aktif:    "success",
-  Pending:  "warning",
   Nonaktif: "danger",
 };
 
-export const supplierColumns: ColumnDef<Supplier>[] = [
+export const vendorColumns: ColumnDef<Vendor>[] = [
   {
     key: "supplier",
     label: "Supplier",
     renderCell: (row) => (
       <div>
         <p className="font-semibold text-gray-900">{row.name}</p>
-        <p className="text-xs text-gray-400 mt-0.5">PIC: {row.pic}</p>
+        {/* <p className="text-xs text-gray-400 mt-0.5">PIC: {row.pic}</p> */}
       </div>
     ),
     minWidth: 200
   },
   {
-    key: "kategori",
-    label: "Kategori",
-        minWidth: 110
-  },
-  {
     key: "kontak",
     label: "Kontak",
         minWidth: 140
+  },
+  {
+  key: "rekening",
+  label: "Rekening Bank",
+  minWidth: 200,
+  renderCell: (row) => {
+    return(
+            <div>
+        <p className="font-semibold text-gray-900">{row.rekening}</p>
+        <p className="text-xs text-gray-400 mt-0.5">PIC: {row.noRekening}</p>
+      </div>
+    )
+  },
+  },
+  {
+  key: "jumlahProduk",
+  label: "Jumlah Produk",
+  minWidth: 140
   },
   {
     key: "status",

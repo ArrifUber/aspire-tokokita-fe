@@ -1,9 +1,6 @@
 "use client";
-import { supplierData } from "@/components/features/supplier/mock/supplier.mock";
-import {
-  Supplier,
-  supplierColumns,
-} from "@/components/features/supplier/supplier.columns";
+import { vendorData } from "@/components/features/vendor/mock/vendor.mock";
+
 import NavBanner from "@/components/Shared/NavBanner";
 import { ReusableTable } from "@/components/Shared/ReusableTable";
 import SelectList, { ListItemsDef } from "@/components/Shared/SelectList";
@@ -12,10 +9,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "@heroui/react";
 import TableSearchField from "@/components/Shared/TableSearchField";
+import { Vendor, vendorColumns } from "@/components/features/vendor/vendor.columns";
 
 export default function SupplierPage() {
   const { currentData, pagination } = usePagination({
-    data: supplierData,
+    data: vendorData,
     rowsPerPage: 5,
     itemLabel: "supplier",
   });
@@ -38,20 +36,20 @@ export default function SupplierPage() {
   return (
     <div className="w-full flex flex-col gap-4 mx-auto">
       <section id="navBanner" className="w-full">
-        <NavBanner bannerTitle="Daftar Supllier" />
+        <NavBanner bannerTitle="Daftar Vendor" />
       </section>
       <section className="w-full">
         <div className="flex flex-col gap-6 bg-surface rounded-2xl p-6 shadow border">
           <div className="flex flex-col bg-surface-tertiary border border-surface-border rounded-xl overflow-hidden">
             <div id="filter" className="flex gap-4 items-center p-6 w-full">
               <TableSearchField placeholder="Cari Supplier..." aria_label="Cari Supplier"/>
-              <SelectList
+              {/* <SelectList
                 ListItems={CategoriesList}
                 placeholder="Pilih Kategori"
                 defaultValue="semuaKategori"
                 width={150}
                 ariaLabel="Pilih kategori"
-              />
+              /> */}
               <SelectList
                 ListItems={StatusList}
                 placeholder="Pilih Status"
@@ -70,10 +68,11 @@ export default function SupplierPage() {
                 </Button>
               </div>
             </div>
-            <ReusableTable<Supplier>
-              columns={supplierColumns}
+            <ReusableTable<Vendor>
+              columns={vendorColumns}
               data={currentData}
               pagination={pagination}
+              emptyMessage="Belum ada vendor terdaftar"
             />
           </div>
         </div>

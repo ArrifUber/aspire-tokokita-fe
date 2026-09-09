@@ -18,6 +18,13 @@ export interface RegisterReq {
   role: "OWNER";
 }
 
+export interface CreateUserReq {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+}
+
 export interface LoginRes {
   accessToken: string;
   refreshToken: string;

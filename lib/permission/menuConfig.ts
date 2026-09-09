@@ -8,6 +8,9 @@ import {
   faCartShopping,
   faBoxesPacking,
   IconDefinition,
+  faAddressCard,
+  faStore,
+  faMoneyBillTransfer,
 } from "@fortawesome/free-solid-svg-icons";
 
 export type AppRole = User["role"];
@@ -25,10 +28,12 @@ export const menuConfig: MenuConfigItem[] = [
   { name: "dashboard", href: "/", icon: faHouse, roles: ALL_ROLES },
   { name: "produk", href: "/produk", icon: faBoxesPacking, roles: ["OWNER", "WAREHOUSE"] },
   { name: "penjualan", href: "/penjualan", icon: faSackDollar, roles: ["OWNER", "CASHIER"] },
-  { name: "pembelian", href: "/pembelian", icon: faCartShopping, roles: ["OWNER", "WAREHOUSE"] },
-  { name: "stok", href: "/stock", icon: faWarehouse, roles: ["OWNER", "WAREHOUSE"] },
-  { name: "pelanggan", href: "/pelanggan", icon: faPeopleGroup, roles: ["OWNER", "CASHIER"] },
-  { name: "supplier", href: "/supplier", icon: faTruckFast, roles: ["OWNER", "WAREHOUSE"] },
+  // { name: "pembelian", href: "/pembelian", icon: faCartShopping, roles: ["OWNER", "WAREHOUSE"] },
+  // { name: "stok", href: "/stock", icon: faWarehouse, roles: ["OWNER", "WAREHOUSE"] },
+  { name: "settlement", href: "/ssettlement", icon: faMoneyBillTransfer, roles: ["OWNER", "WAREHOUSE"] },
+  // { name: "pelanggan", href: "/pelanggan", icon: faPeopleGroup, roles: ["OWNER", "CASHIER"] },
+  { name: "vendor", href: "/vendor", icon: faStore, roles: ["OWNER", "WAREHOUSE"] },
+  // {name: "staff", href: "/staff", icon: faAddressCard, roles: ["OWNER"]}
 ];
 
 export function isPathMatch(href: string, pathname: string) {
