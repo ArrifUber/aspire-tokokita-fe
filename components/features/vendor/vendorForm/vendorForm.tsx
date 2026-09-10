@@ -7,6 +7,8 @@ import {
   Input,
   Label,
   ListBox,
+  NumberField,
+  NumberFieldGroup,
   Select,
   TextField,
 } from "@heroui/react";
@@ -83,9 +85,10 @@ export function VendorForm({
         isRequired
         defaultValue={initialData.kontak}
         className="w-full"
+        minLength={4}
       >
         <Label>No. WhatsApp</Label>
-        <Input placeholder="Contoh: 081234567890" className={"rounded"}/>
+        <Input placeholder="Contoh: 081234567890" className={"rounded"} type="number" inputMode="tel"/>
       </TextField>
 
       <TextField
@@ -144,10 +147,11 @@ export function VendorForm({
         isRequired
         defaultValue={initialData.noRekening}
         className="w-full"
+        minLength={9}
       >
         <Label>Nomor Rekening</Label>
         <Input
-          type="text"
+          type="number"
           inputMode="numeric"
           placeholder="Masukkan nomor rekening"
           className={"rounded"}

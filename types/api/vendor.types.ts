@@ -29,3 +29,9 @@ export interface VendorFormData {
   namaKontak: string;
   status: VendorStatus;
 }
+
+
+export interface UpdateVendorRequest{
+  id: string
+  payload: VendorFormData
+}

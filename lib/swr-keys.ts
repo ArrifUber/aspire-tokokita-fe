@@ -21,4 +21,9 @@ export const SWR_KEYS = {
   profile: {
     me: "profile/me",
   },
+
+  vendor: {
+    all: "vendors",
+    detail: (id: string) => `vendor/${id}`,
+  }
 };
