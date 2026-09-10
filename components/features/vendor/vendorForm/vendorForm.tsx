@@ -22,8 +22,8 @@ interface VendorFormProps {
 
 const defaultValues: VendorFormData = {
   name: "",
-  kontak: "",
-  namaKontak: "",
+  contactPerson: "",
+  noWhatsapp: "",
   rekening: "",
   noRekening: "",
   status: "Aktif",
@@ -47,10 +47,10 @@ export function VendorForm({
 
     const data: VendorFormData = {
       name: String(formData.get("name") ?? ""),
-      kontak: String(formData.get("kontak") ?? ""),
+      noWhatsapp: String(formData.get("kontak") ?? ""),
       rekening: String(formData.get("rekening") ?? ""),
       noRekening: String(formData.get("noRekening") ?? ""),
-      namaKontak: String(formData.get("namaKontak") ?? ""),
+      contactPerson: String(formData.get("namaKontak") ?? ""),
       status: String(
         formData.get("status") ?? "Aktif",
       ) as VendorStatus,
@@ -83,7 +83,7 @@ export function VendorForm({
       <TextField
         name="kontak"
         isRequired
-        defaultValue={initialData.kontak}
+        defaultValue={initialData.noWhatsapp}
         className="w-full"
         minLength={4}
       >
@@ -94,7 +94,7 @@ export function VendorForm({
       <TextField
         name="namaKontak"
         isRequired
-        defaultValue={initialData.namaKontak}
+        defaultValue={initialData.contactPerson}
         className="w-full"
       >
         <Label>Contact Person</Label>

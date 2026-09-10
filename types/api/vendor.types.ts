@@ -1,20 +1,11 @@
-export interface Vendor {
-  name: string;
-  kontak: string;
-  rekening: string;
-  noRekening: string;
-  jumlahProduk: string
-  status: "Aktif" | "Nonaktif";
-}
-
-
 // Untuk real datanya nanti
 export type VendorStatus = "Aktif" | "Nonaktif";
 
-export interface Vendor2 {
+export interface Vendor {
   id: string;
   name: string;
-  kontak: string;
+  contactPerson: string;
+  noWhatsapp: string;
   rekening: string;
   noRekening: string;
   jumlahProduk: number;
@@ -23,10 +14,10 @@ export interface Vendor2 {
 
 export interface VendorFormData {
   name: string;
-  kontak: string;
+    contactPerson: string;
+  noWhatsapp: string;
   rekening: string;
   noRekening: string;
-  namaKontak: string;
   status: VendorStatus;
 }
 

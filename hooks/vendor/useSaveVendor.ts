@@ -25,7 +25,7 @@ export function useSaveVendor() {
     error: updateError,
     reset: resetUpdateError,
   } = useSWRMutation(
-    SWR_KEYS.product.all,
+    SWR_KEYS.vendor.all,
     (_key: string, { arg }: { arg: UpdateVendorRequest }) => updateVendorApi(arg),
   );
 
@@ -60,7 +60,7 @@ export function useSaveVendor() {
     }
   }
 
-  async function saveProduct(payload: VendorFormData, vendorId?: string) {
+  async function saveVendor(payload: VendorFormData, vendorId?: string) {
     if (vendorId) {
       return updateVendor({ id: vendorId, payload });
     }
@@ -70,7 +70,7 @@ export function useSaveVendor() {
   return {
     addVendor,
     updateVendor,
-    saveProduct,
+    saveVendor,
     isLoading: isAdding || isUpdating,
     error:
       getErrorMessage(addError, "Gagal menambahkan vendor") ??

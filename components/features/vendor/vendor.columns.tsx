@@ -23,7 +23,12 @@ export const vendorColumns: ColumnDef<Vendor>[] = [
     minWidth: 200
   },
   {
-    key: "kontak",
+    key: "contactPerson",
+    label: "Contact Person",
+        minWidth: 160
+  },
+  {
+    key: "noWhatsapp",
     label: "Kontak",
         minWidth: 160
   },
@@ -66,7 +71,7 @@ export const vendorColumns: ColumnDef<Vendor>[] = [
     label: "Aksi",
     renderCell: (row) => (
       <div className="flex items-center gap-2">
-        <ActionVendorButton />
+        <ActionVendorButton code="amama" id="p"/>
       </div>
     ),
         minWidth: 150

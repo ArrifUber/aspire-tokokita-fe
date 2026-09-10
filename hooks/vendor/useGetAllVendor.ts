@@ -15,7 +15,7 @@ export function useGetAllVendor() {
   );
 
   return {
-    products: vendors || [],
+    vendors: vendors || [],
     error: getErrorMessage(vendorError, "Gagal mengambil daftar vendor"),
     isLoading,
     refetch: mutate,

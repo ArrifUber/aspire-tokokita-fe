@@ -1,13 +1,13 @@
-import {  UpdateVendorRequest, Vendor2, VendorFormData } from "@/types/api/vendor.types";
+import {  UpdateVendorRequest, Vendor, VendorFormData } from "@/types/api/vendor.types";
 import { apiClient } from "./client";
 import { ApiResponse } from "@/types/api/base.types";
 
-export async function getAllVendor(): Promise<Vendor2[]> {
-    const res = await apiClient.get<ApiResponse<Vendor2[]>>("/vendor")
+export async function getAllVendor(): Promise<Vendor[]> {
+    const res = await apiClient.get<ApiResponse<Vendor[]>>("/vendor")
     return res.data.data
 }
-export async function getVendorById(id: string): Promise<Vendor2> {
-  const res = await apiClient.get<ApiResponse<Vendor2>>(
+export async function getVendorById(id: string): Promise<Vendor> {
+  const res = await apiClient.get<ApiResponse<Vendor>>(
     `/vendor/${id}`
   );
   return res.data.data;
@@ -15,9 +15,9 @@ export async function getVendorById(id: string): Promise<Vendor2> {
 
 export async function createNewVendor(
   payload: VendorFormData,
-): Promise<Vendor2> {
+): Promise<Vendor> {
   
-  const res = await apiClient.post<ApiResponse<Vendor2>>(
+  const res = await apiClient.post<ApiResponse<Vendor>>(
     "/vendor/",
     payload,
   );
@@ -27,23 +27,23 @@ export async function createNewVendor(
 export async function updateVendor({
   id,
   payload,
-}: UpdateVendorRequest): Promise<Vendor2> {
-  const res = await apiClient.put<ApiResponse<Vendor2>>(
+}: UpdateVendorRequest): Promise<Vendor> {
+  const res = await apiClient.put<ApiResponse<Vendor>>(
     `/vendor/${id}`,
     payload,
   );
   return res.data.data;
 }
 
-export async function toggleVendorStatus(id: string): Promise<Vendor2> {
-  const res = await apiClient.patch<ApiResponse<Vendor2>>(
+export async function toggleVendorStatus(id: string): Promise<Vendor> {
+  const res = await apiClient.patch<ApiResponse<Vendor>>(
     `/vendor/${id}/toggle`
   );
   return res.data.data;
 }
 
-export async function deleteVendorById(id: string): Promise<Vendor2> {
-  const res = await apiClient.delete<ApiResponse<Vendor2>>(
+export async function deleteVendorById(id: string): Promise<Vendor> {
+  const res = await apiClient.delete<ApiResponse<Vendor>>(
     `/vendor/${id}`
   );
   return res.data.data;

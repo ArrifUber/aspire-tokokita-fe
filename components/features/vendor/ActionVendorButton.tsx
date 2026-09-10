@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AlertDialog, Button, Dropdown, Label } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import {  useState } from "react";
-import ProductDetailModal from "../product/ProductDetailModal";
+import VendorDetailModal from "./VendorDetailModal";
 
 interface Props {
   id: string;
@@ -57,7 +57,7 @@ export default function ActionVendorButton({ id, code }: Props) {
 
   return (
     <>
-    {isModalOpen && id && <ProductDetailModal id={id} isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>}
+    {isModalOpen && id && <VendorDetailModal id={id} isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>}
       {isLoading && <LoadingAlert title="Sedang menghapus produk..." />}
       {error && (
         <ErrorAlert

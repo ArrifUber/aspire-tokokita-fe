@@ -10,7 +10,7 @@ export function useVendorDetail(id: string) {
   );
 
   return {
-    product: data,
+    vendor: data,
     error: getErrorMessage(error, "Gagal mengambil data vendor"),
     isLoading,
   };

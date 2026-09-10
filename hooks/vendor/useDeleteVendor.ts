@@ -5,7 +5,7 @@ import { useState } from "react";
 import { mutate } from "swr";
 import useSWRMutation from "swr/mutation";
 
-export function useDeleteProduct() {
+export function useDeleteVendor() {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const {
