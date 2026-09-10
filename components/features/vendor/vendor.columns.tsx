@@ -1,15 +1,9 @@
 import { ColumnDef } from "@/components/Shared/ReusableTable";
 import { Chip } from "@heroui/react";
-import ActionProductButton from "../product/ActionProductButton";
+import { Vendor } from "@/types/api/vendor.types";
+import ActionVendorButton from "./ActionVendorButton";
 
-export interface Vendor {
-  name: string;
-  kontak: string;
-  rekening: string;
-  noRekening: string;
-  jumlahProduk: string
-  status: "Aktif" | "Nonaktif";
-}
+
 
 const statusColorMap: Record<Vendor["status"], "success"  | "danger"> = {
   Aktif:    "success",
@@ -31,17 +25,17 @@ export const vendorColumns: ColumnDef<Vendor>[] = [
   {
     key: "kontak",
     label: "Kontak",
-        minWidth: 140
+        minWidth: 160
   },
   {
   key: "rekening",
   label: "Rekening Bank",
-  minWidth: 200,
+  minWidth: 250,
   renderCell: (row) => {
     return(
             <div>
         <p className="font-semibold text-gray-900">{row.rekening}</p>
-        <p className="text-xs text-gray-400 mt-0.5">PIC: {row.noRekening}</p>
+        <p className="text-sm text-gray-400 mt-0.5">{row.noRekening}</p>
       </div>
     )
   },
@@ -72,7 +66,7 @@ export const vendorColumns: ColumnDef<Vendor>[] = [
     label: "Aksi",
     renderCell: (row) => (
       <div className="flex items-center gap-2">
-        <ActionProductButton />
+        <ActionVendorButton />
       </div>
     ),
         minWidth: 150

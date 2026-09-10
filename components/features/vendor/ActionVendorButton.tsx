@@ -15,14 +15,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AlertDialog, Button, Dropdown, Label } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import {  useState } from "react";
-import ProductDetailModal from "./ProductDetailModal";
+import ProductDetailModal from "../product/ProductDetailModal";
 
 interface Props {
   id: string;
   code: string
 }
 
-export default function ActionProductButton({ id, code }: Props) {
+export default function ActionVendorButton({ id, code }: Props) {
   const router = useRouter();
 
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -78,7 +78,7 @@ export default function ActionProductButton({ id, code }: Props) {
           isIconOnly
           variant="outline"
           className={"rounded-md"}
-          onPress={() => router.push(`/produk/edit/${id}`)}
+          onPress={() => router.push(`/vendor/edit/${id}`)}
         >
           <FontAwesomeIcon icon={faPencil} />
         </Button>
@@ -126,11 +126,11 @@ export default function ActionProductButton({ id, code }: Props) {
                 <AlertDialog.Header>
                   <AlertDialog.Icon status="danger" />
                   <AlertDialog.Heading>
-                    Hapus produk ini? {`(SKU: ${code})`}
+                    Hapus vendor ini? {`(SKU: ${code})`}
                   </AlertDialog.Heading>
                 </AlertDialog.Header>
                 <AlertDialog.Body>
-                  <p>Tindakan ini tidak dapat dibatalkan. Produk akan dihapus secara permanen.</p>
+                  <p>Tindakan ini tidak dapat dibatalkan. Data vendor akan dihapus secara permanen.</p>
                 </AlertDialog.Body>
                 <AlertDialog.Footer>
                   <Button
@@ -145,7 +145,7 @@ export default function ActionProductButton({ id, code }: Props) {
                     className="rounded"
                     onPress={handleDelete}
                   >
-                    Ya, Hapus Produk
+                    Ya, Hapus Vendor
                   </Button>
                 </AlertDialog.Footer>
               </AlertDialog.Dialog>

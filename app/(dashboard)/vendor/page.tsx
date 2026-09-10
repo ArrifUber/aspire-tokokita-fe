@@ -7,9 +7,11 @@ import SelectList, { ListItemsDef } from "@/components/Shared/SelectList";
 import { usePagination } from "@/hooks/usePagination";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button } from "@heroui/react";
+import { Button, buttonVariants } from "@heroui/react";
 import TableSearchField from "@/components/Shared/TableSearchField";
-import { Vendor, vendorColumns } from "@/components/features/vendor/vendor.columns";
+import { vendorColumns } from "@/components/features/vendor/vendor.columns";
+import { Vendor } from "@/types/api/vendor.types";
+import Link from "next/link";
 
 export default function SupplierPage() {
   const { currentData, pagination } = usePagination({
@@ -58,14 +60,14 @@ export default function SupplierPage() {
                 ariaLabel="Pilih status"
               />
               <div className="ml-auto">
-                <Button
-                  variant="primary"
-                  className={
-                    "rounded-md shadow-sm border-0 bg-primary hover:bg-primary-700"
-                  }
-                >
-                  <FontAwesomeIcon icon={faPlus} /> Tambah Supplier
-                </Button>
+            <Link
+              href={"/vendor/tambah"}
+              className={`${buttonVariants({
+                variant: "primary",
+              })} text-white rounded-md shadow-sm border-0 bg-primary hover:bg-primary-700`}
+            >
+              <FontAwesomeIcon icon={faPlus} /> Tambah Vendor
+            </Link>
               </div>
             </div>
             <ReusableTable<Vendor>
