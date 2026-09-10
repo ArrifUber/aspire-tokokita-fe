@@ -7,60 +7,74 @@ import {
   Input,
   Label,
   ListBox,
-  NumberField,
-  NumberFieldGroup,
   Select,
   TextField,
 } from "@heroui/react";
-import type { VendorFormData, VendorStatus } from "@/types/api/vendor.types";
+import type { Vendor, VendorFormData } from "@/types/api/vendor.types";
+import { useSaveVendor } from "@/hooks/vendor/useSaveVendor";
+import { useState } from "react";
 
 interface VendorFormProps {
   mode: "create" | "edit";
-  initialData?: VendorFormData;
+  initialData?: Vendor;
   onSubmit?: (data: VendorFormData) => void | Promise<void>;
 }
 
-const defaultValues: VendorFormData = {
+const defaultValues = {
   name: "",
-  contactPerson: "",
-  noWhatsapp: "",
+  picName: "",
+  picPhone: "",
   rekening: "",
   noRekening: "",
-  status: "Aktif",
+  isActive: true,
 };
+
 
 export function VendorForm({
   mode,
-  initialData = defaultValues,
+  initialData,
   onSubmit,
 }: VendorFormProps) {
+  console.log(initialData)
+  const {saveVendor, isLoading, isSuccess, clearError, clearSuccess, error} = useSaveVendor() 
   const router = useRouter();
+
+   const [form, setForm] = useState(() => ({
+      name: initialData?.name ?? "",
+      picName: initialData?.picName ?? "",
+      picPhone: initialData?.picPhone ?? "",
+      rekening: initialData?.rekening ?? "",
+      noRekening: initialData?.noRekening ?? "",
+      isActive: initialData?.isActive ?? false,
+    }));
+
+  const updateField = (key) => (value) =>
+    setForm((prev) => ({ ...prev, [key]: value }));
+  
 
   const isEdit = mode === "edit";
 
   const handleSubmit = async (
-    event: React.FormEvent<HTMLFormElement>,
+    event,
   ) => {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    const payload = {
+      ...form
+    }
 
-    const data: VendorFormData = {
-      name: String(formData.get("name") ?? ""),
-      noWhatsapp: String(formData.get("kontak") ?? ""),
-      rekening: String(formData.get("rekening") ?? ""),
-      noRekening: String(formData.get("noRekening") ?? ""),
-      contactPerson: String(formData.get("namaKontak") ?? ""),
-      status: String(
-        formData.get("status") ?? "Aktif",
-      ) as VendorStatus,
-    };
+    console.log(payload)
 
-    await onSubmit?.(data);
+    const success = await saveVendor(payload, initialData?.id);
 
-    // Untuk sementara, setelah submit kembali ke list.
-    // Nanti bisa diganti setelah API backend tersedia.
-    router.push("/vendor");
+    if (success) {
+      if (mode === "create") {
+        setForm(defaultValues);
+        router.push("/vendor");
+      } else {
+        router.push("/vendor");
+      }
+    }
   };
 
   return (
@@ -72,42 +86,43 @@ export function VendorForm({
       <TextField
         name="name"
         isRequired
-        defaultValue={initialData.name}
+        defaultValue={form.name}
         className="w-full"
       >
         <Label>Nama Vendor</Label>
-        <Input placeholder="Masukkan nama vendor" className={"rounded"} />
+        <Input placeholder="Masukkan nama vendor" className={"rounded"} onChange={(e) => updateField("name")(e.target.value)}/>
       </TextField>
 
       {/* Kontak */}
       <TextField
         name="kontak"
         isRequired
-        defaultValue={initialData.noWhatsapp}
+        defaultValue={form.picPhone}
         className="w-full"
         minLength={4}
       >
         <Label>No. WhatsApp</Label>
-        <Input placeholder="Contoh: 081234567890" className={"rounded"} type="number" inputMode="tel"/>
+        <Input placeholder="Contoh: 081234567890" className={"rounded"} type="number" inputMode="tel" onChange={(e) => updateField("picPhone")(e.target.value)}/>
       </TextField>
 
       <TextField
         name="namaKontak"
         isRequired
-        defaultValue={initialData.contactPerson}
+        defaultValue={form.picName}
         className="w-full"
       >
         <Label>Contact Person</Label>
-        <Input placeholder="Contoh: Pak Budi " className={"rounded"}/>
+        <Input placeholder="Contoh: Pak Budi " className={"rounded"} onChange={(e) => updateField("picName")(e.target.value)}/>
       </TextField>
 
       {/* Bank */}
       <Select
         name="rekening"
         isRequired
-        defaultValue={initialData.rekening}
+        defaultValue={form.rekening}
         className="w-full"
         placeholder="Pilih bank"
+        onChange={updateField("rekening")}
       >
         <Label>Bank</Label>
 
@@ -145,7 +160,7 @@ export function VendorForm({
       <TextField
         name="noRekening"
         isRequired
-        defaultValue={initialData.noRekening}
+        defaultValue={form.noRekening}
         className="w-full"
         minLength={9}
       >
@@ -155,6 +170,7 @@ export function VendorForm({
           inputMode="numeric"
           placeholder="Masukkan nomor rekening"
           className={"rounded"}
+          onChange={(e) => updateField("noRekening")(e.target.value)}
         />
       </TextField>
 
@@ -163,8 +179,9 @@ export function VendorForm({
         <Select
           name="status"
           isRequired
-          defaultValue={initialData.status}
+          defaultValue={(form.isActive ? "Aktif" : "Nonaktif")}
           className="w-full"
+          onChange={updateField("isActive")}
         >
           <Label>Status Vendor</Label>
 

@@ -4,31 +4,27 @@ import { Vendor } from "@/types/api/vendor.types";
 import ActionVendorButton from "./ActionVendorButton";
 
 
-
-const statusColorMap: Record<Vendor["status"], "success"  | "danger"> = {
-  Aktif:    "success",
-  Nonaktif: "danger",
-};
-
 export const vendorColumns: ColumnDef<Vendor>[] = [
   {
     key: "supplier",
     label: "Supplier",
     renderCell: (row) => (
-      <div>
+      <div className="flex gap-2 items-center">
+        <div className="w-8 h-8 flex justify-center items-center rounded-full bg-gray-200">
+          {row.name[0]}
+        </div>
         <p className="font-semibold text-gray-900">{row.name}</p>
-        {/* <p className="text-xs text-gray-400 mt-0.5">PIC: {row.pic}</p> */}
       </div>
     ),
     minWidth: 200
   },
   {
-    key: "contactPerson",
+    key: "picName",
     label: "Contact Person",
         minWidth: 160
   },
   {
-    key: "noWhatsapp",
+    key: "picPhone",
     label: "Kontak",
         minWidth: 160
   },
@@ -56,11 +52,11 @@ export const vendorColumns: ColumnDef<Vendor>[] = [
     renderCell: (row) => {
       return (
         <Chip
-          color={statusColorMap[row.status]}
+          color={(row.isActive ? "success": "danger")}
           variant="soft"
           className="rounded-md capitalize"
         >
-          {row.status}
+          {(row.isActive ? "Aktif": "Nonaktif")}
         </Chip>
       );
     },
@@ -71,7 +67,7 @@ export const vendorColumns: ColumnDef<Vendor>[] = [
     label: "Aksi",
     renderCell: (row) => (
       <div className="flex items-center gap-2">
-        <ActionVendorButton code="amama" id="p"/>
+        <ActionVendorButton id={row.id}/>
       </div>
     ),
         minWidth: 150

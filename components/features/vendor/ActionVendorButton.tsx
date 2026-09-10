@@ -15,14 +15,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AlertDialog, Button, Dropdown, Label } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import {  useState } from "react";
-import VendorDetailModal from "./VendorDetailModal";
 
 interface Props {
   id: string;
-  code: string
 }
 
-export default function ActionVendorButton({ id, code }: Props) {
+export default function ActionVendorButton({ id }: Props) {
   const router = useRouter();
 
   const [isAlertOpen, setIsAlertOpen] = useState(false);
@@ -57,7 +55,6 @@ export default function ActionVendorButton({ id, code }: Props) {
 
   return (
     <>
-    {isModalOpen && id && <VendorDetailModal id={id} isOpen={isModalOpen} setIsOpen={setIsModalOpen}/>}
       {isLoading && <LoadingAlert title="Sedang menghapus produk..." />}
       {error && (
         <ErrorAlert
@@ -126,7 +123,7 @@ export default function ActionVendorButton({ id, code }: Props) {
                 <AlertDialog.Header>
                   <AlertDialog.Icon status="danger" />
                   <AlertDialog.Heading>
-                    Hapus vendor ini? {`(SKU: ${code})`}
+                    Hapus vendor ini?
                   </AlertDialog.Heading>
                 </AlertDialog.Header>
                 <AlertDialog.Body>

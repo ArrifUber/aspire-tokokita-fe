@@ -18,7 +18,7 @@ export async function createNewVendor(
 ): Promise<Vendor> {
   
   const res = await apiClient.post<ApiResponse<Vendor>>(
-    "/vendor/",
+    "/vendor/create",
     payload,
   );
   return res.data.data;

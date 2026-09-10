@@ -1,5 +1,5 @@
 "use client";
-import { vendorData } from "@/components/features/vendor/mock/vendor.mock";
+// import { vendorData } from "@/components/features/vendor/mock/vendor.mock";
 
 import NavBanner from "@/components/Shared/NavBanner";
 import { ReusableTable } from "@/components/Shared/ReusableTable";
@@ -12,10 +12,12 @@ import TableSearchField from "@/components/Shared/TableSearchField";
 import { vendorColumns } from "@/components/features/vendor/vendor.columns";
 import { Vendor } from "@/types/api/vendor.types";
 import Link from "next/link";
+import { useGetAllVendor } from "@/hooks/vendor/useGetAllVendor";
 
 export default function SupplierPage() {
+  const {error, isLoading, vendors} = useGetAllVendor()
   const { currentData, pagination } = usePagination({
-    data: vendorData,
+    data: vendors,
     rowsPerPage: 5,
     itemLabel: "supplier",
   });
