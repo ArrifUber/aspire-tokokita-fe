@@ -5,7 +5,6 @@ import NavBanner from "@/components/Shared/NavBanner";
 import { useGetAllProduct } from "@/hooks/product/useGetAllProduct";
 
 export default function ProductPage() {
-  const { error, isLoading, products } = useGetAllProduct();
 
 
   return (
@@ -14,12 +13,8 @@ export default function ProductPage() {
         <NavBanner bannerTitle="Daftar Produk" />
       </section>
       <section id="productTable" className="w-full">
-        {error ? (
-          <ErrorProductSection errorMsg={error} />
-        ) : (
-          // <ProductSection products={isLoading || !products ? [] : products} />
+
           <ProductSection/>
-        )}
       </section>
     </div>
   );

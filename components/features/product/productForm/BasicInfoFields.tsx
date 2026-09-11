@@ -50,7 +50,7 @@ export default function BasicInfoFields({
           onChange={(file) => setImageFile(file)}
           value={form.image}
         />
-        <div className="flex flex-col gap-8 items-start flex-1">
+        <div className="flex flex-col gap-4 items-start flex-1">
           <TextField isRequired className="w-full " name="name" type="text">
             <Label className="font-semibold">Nama Produk</Label>
             <Input

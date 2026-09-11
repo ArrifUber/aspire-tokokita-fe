@@ -14,7 +14,7 @@ export default function DescriptionField({ form, updateField }) {
           />
         </div>
         <div>
-          <h2 className="text-xl font-semibold">3. Deskripsi</h2>{" "}
+          <h2 className="text-xl font-semibold">4. Deskripsi</h2>{" "}
           <p className="text-slate-500 text-sm">
             Jelaskan produk anda secara detail.
           </p>

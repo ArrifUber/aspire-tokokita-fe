@@ -12,11 +12,8 @@ import { Product } from "@/types/api/product.types";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { useGetAllCategory } from "@/hooks/product/useGetAllCategory";
 import { useUploadFile } from "@/hooks/file/useUploadFile";
-
-// const PRODUCT_CATEGORY_LIST = createList([
-//   { key: "aksesoris", textValue: "Aksesoris" },
-//   { key: "elektronik", textValue: "Elektronik" },
-// ]);
+import { useGetAllVendor } from "@/hooks/vendor/useGetAllVendor";
+import KonsinyasiField from "./KonsinyasiField";
 
 const IDR_FORMAT_OPTIONS: Intl.NumberFormatOptions = {
   currency: "IDR",
@@ -28,10 +25,12 @@ const IDR_FORMAT_OPTIONS: Intl.NumberFormatOptions = {
 const EMPTY_FORM_STATE = {
   name: "",
   categoryId: "",
+  vendorId: "",
   stock: 0,
   description: "",
   image: null,
   minimumStock: 0,
+  commissionPercent: 0,
 };
 
 interface ProductFormSectionProps {
@@ -46,6 +45,8 @@ export default function ProductFormSection({
   const router = useRouter();
 
   const { categoryList } = useGetAllCategory();
+  const {vendors} = useGetAllVendor()
+
 
   const { saveProduct, isLoading, error, isSuccess, clearError, clearSuccess } =
     useSaveProduct();
@@ -58,16 +59,20 @@ export default function ProductFormSection({
     stock: initialData?.stock ?? 0,
     description: initialData?.description ?? "",
     image: initialData?.image ?? null,
-    minimumStock: initialData?.minimumStock ?? 5
+    minimumStock: initialData?.minimumStock ?? 5,
+    vendorId: initialData?.vendorId ?? "",
+    commissionPercent: initialData?.commissionPercent ?? 0,
   }));
 
   const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const [buyPrice, setBuyPrice] = useState(initialData?.buyPrice ?? 0);
   const [sellPrice, setSellPrice] = useState(initialData?.sellPrice ?? 0);
 
   const updateField = (key) => (value) =>
     setForm((prev) => ({ ...prev, [key]: value }));
+
+  console.log(form)
+  console.log(sellPrice)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,7 +96,6 @@ export default function ProductFormSection({
     const payload = {
       ...form,
       image: imageFileName,
-      buyPrice,
       sellPrice,
     };
 
@@ -100,7 +104,6 @@ export default function ProductFormSection({
     if (success) {
       if (mode === "create") {
         setForm(EMPTY_FORM_STATE);
-        setBuyPrice(0);
         setSellPrice(0);
         router.push("/produk");
       } else {
@@ -137,10 +140,6 @@ export default function ProductFormSection({
         className="flex flex-col gap-6 bg-surface rounded-2xl p-6 shadow border"
         onSubmit={handleSubmit}
       >
-        {/* <ImageField
-          value={form.image}
-          onChange={(file) => setImageFile(file)}
-        /> */}
         <BasicInfoFields
           PRODUCT_CATEGORY_LIST={categoryList}
           form={form}
@@ -148,12 +147,12 @@ export default function ProductFormSection({
           setImageFile={setImageFile}
         />
         <hr />
+        <KonsinyasiField VENDOR_CATEGORY_LIST={vendors}  form={form} updateField={updateField}/>
+        <hr/>
         <PriceFields
           IDR_FORMAT_OPTIONS={IDR_FORMAT_OPTIONS}
-          buyPrice={buyPrice}
           form={form}
           sellPrice={sellPrice}
-          setBuyPrice={setBuyPrice}
           setSellPrice={setSellPrice}
           updateField={updateField}
         />

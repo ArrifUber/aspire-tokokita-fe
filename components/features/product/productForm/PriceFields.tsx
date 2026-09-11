@@ -1,3 +1,4 @@
+import { Vendor } from "@/types/api/vendor.types";
 import { faCoins } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -5,18 +6,19 @@ import {
   FieldError,
   Input,
   Label,
+  ListBox,
   NumberField,
+  Select,
 } from "@heroui/react";
 import React from "react";
 
 interface PriceFieldsProps {
   IDR_FORMAT_OPTIONS: Intl.NumberFormatOptions;
   updateField: (key: string) => (value: string | number) => void;
-  buyPrice: number;
-  setBuyPrice: (value: number) => void;
   form: {
     stock: number;
     minimumStock: number;
+
   };
   sellPrice: number;
   setSellPrice: (value: number) => void;
@@ -24,8 +26,6 @@ interface PriceFieldsProps {
 
 export default function PriceFields({
   IDR_FORMAT_OPTIONS,
-  buyPrice,
-  setBuyPrice,
   updateField,
   form,
   sellPrice,
@@ -38,86 +38,65 @@ export default function PriceFields({
           <FontAwesomeIcon icon={faCoins} size="xl" className="text-primary" />
         </div>
         <div>
-          <h2 className="text-xl font-semibold">2. Harga & Stok</h2>
-          <p className="text-slate-500 text-sm">Atur harga dan stok produk.</p>
+          <h2 className="text-xl font-semibold">3. Harga & Stok</h2>
+          <p className="text-slate-500 text-sm">
+            Atur harga dan ketersedian produk.
+          </p>
         </div>
       </div>
-      <div className="flex gap-4 items-start flex-wrap">
-        <FieldContainer>
-          <NumberField
-            isRequired
-            name="buyPrice"
-            className="w-full "
-            value={buyPrice}
-            onChange={setBuyPrice}
-            minValue={0}
-            formatOptions={IDR_FORMAT_OPTIONS}
-          >
-            <Label>Harga Beli</Label>
-            <Input placeholder="Contoh: Rp10.000" className="rounded" />
-            <Description>Modal atau harga pembelian produk.</Description>
-            <FieldError />
-          </NumberField>
-        </FieldContainer>
+      <div className="flex gap-4 items-start flex-wrap md:flex-nowrap">
 
-        <FieldContainer>
-          <NumberField
-            isRequired
-            name="sellPrice"
-            className="w-full "
-            value={sellPrice}
-            onChange={setSellPrice}
-            minValue={0}
-            formatOptions={IDR_FORMAT_OPTIONS}
-            validate={(value) => {
-              if (value <= buyPrice) {
-                return "Harga jual harus lebih besar dari harga beli.";
-              }
-              return null;
-            }}
-          >
-            <Label>Harga Jual</Label>
-            <Input placeholder="Contoh: Rp20.000" className="rounded" />
-            <Description>Harga yang ditampilkan ke pelanggan.</Description>
 
-            <FieldError />
-          </NumberField>
-        </FieldContainer>
+        <NumberField
+          isRequired
+          name="sellPrice"
+          className={"w-full"}
+          value={sellPrice}
+          onChange={setSellPrice}
+          minValue={0}
+          formatOptions={IDR_FORMAT_OPTIONS}
+        >
+          <Label className="font-semibold">Harga Jual</Label>
+          <Input placeholder="Contoh: Rp20.000" className="rounded" />
+          <Description>Harga jual produk.</Description>
 
-        <FieldContainer>
-          <NumberField
-            isRequired
-            name="minimumStock"
-            className="w-full "
-            value={form.minimumStock}
-            onChange={updateField("minimumStock")}
-            minValue={1}
-            step={1}
-          >
-            <Label >Minimum Stock</Label>
-            <Input placeholder="Contoh: 5" className="rounded" />
-            <Description>Batas minimum stock, sebelum ditandai menipis.</Description>
+          <FieldError />
+        </NumberField>
 
-            <FieldError />
-          </NumberField>
-        </FieldContainer>
-        <FieldContainer>
-          <NumberField
-            isRequired
-            name="stock"
-            className="w-full "
-            value={form.stock}
-            onChange={updateField("stock")}
-            minValue={0}
-            step={1}
-          >
-            <Label >Jumlah Stok Awal</Label>
-            <Input placeholder="Contoh: 10" className="rounded" />
-            <Description>Stok tersedia saat produk ditambahkan.</Description>
+                <NumberField
+          isRequired
+          name="stock"
+          className="w-full flex flex-col"
+          value={form.stock}
+          onChange={updateField("stock")}
+          minValue={0}
+          step={1}
+        >
+          <Label className="font-semibold">Jumlah Stok Awal</Label>
+          <Input placeholder="Contoh: 10" className="rounded" />
+          <Description>Stok tersedia saat produk ditambahkan.</Description>
 
-            <FieldError />
-          </NumberField>
-        </FieldContainer>
+          <FieldError />
+        </NumberField>
+
+        <NumberField
+          isRequired
+          name="minimumStock"
+className={"w-full"}
+
+          value={form.minimumStock}
+          onChange={updateField("minimumStock")}
+          minValue={1}
+          step={1}
+        >
+          <Label className="font-semibold">Minimum Stock</Label>
+          <Input placeholder="Contoh: 5" className="rounded" />
+          <Description>
+            Batas minimum stock, sebelum ditandai menipis.
+          </Description>
+
+          <FieldError />
+        </NumberField>
       </div>
     </div>
   );
@@ -125,6 +104,8 @@ export default function PriceFields({
 
 export function FieldContainer({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-4 py-6 bg-gray-50 rounded-md border w-full">{children}</div>
+    <div className="px-4 py-6 bg-gray-50 rounded-md border w-full">
+      {children}
+    </div>
   );
 }

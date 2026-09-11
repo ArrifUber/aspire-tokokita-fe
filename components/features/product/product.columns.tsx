@@ -86,6 +86,11 @@ export const productColumns: ColumnDef<Product>[] = [
     minWidth: 160,
     renderCell: (row) => <p>{row.category.name}</p>,
   },
+  {
+    key: "vendor",
+    label: "Vendor",
+    renderCell: (row) => <p>{row.vendor.name}</p>,
+  },
 {
     key: "stock",
     label: "stok",
@@ -107,17 +112,17 @@ export const productColumns: ColumnDef<Product>[] = [
       );
     },
   },
-  {
-    key: "buyPrice",
-    label: "Harga Beli",
-    minWidth: 140,
-    renderCell: (row) => <p>{formatPrice(row.buyPrice)}</p>,
-  },
+
   {
     key: "sellPrice",
     label: "Harga Jual",
     minWidth: 140,
     renderCell: (row) => <p>{formatPrice(row.sellPrice)}</p>,
+  },
+  {
+    key: "komisi",
+    label: "Komisi Toko",
+    renderCell: (row) => <p>{(row.commissionPercent)}%</p>,
   },
   {
     key: "isActive",

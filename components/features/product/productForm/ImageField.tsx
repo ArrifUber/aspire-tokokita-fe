@@ -93,9 +93,9 @@ export default function ImageField({
         className="rounded-lg flex flex-col items-center justify-center gap-3"
       >
         {isLoadingImage && !localPreview ? (
-          <div className="w-56 h-56 rounded-lg bg-muted animate-pulse border" />
+          <div className="w-48 h-48 rounded-lg bg-muted animate-pulse border" />
         ) : preview ? (
-          <div className="relative w-56 h-56 border rounded-lg bg-primary-50">
+          <div className="relative w-48 h-48 border rounded-lg bg-primary-50">
             <img
               src={preview}
               alt="Preview produk"
@@ -112,7 +112,7 @@ export default function ImageField({
             </Button>
           </div>
         ) : (
-          <div className="relative w-56 h-56 border rounded-lg bg-primary-50">
+          <div className="relative w-48 h-48 border rounded-lg bg-primary-50">
             <img
               src="/image-placeholder.png"
               alt="Preview produk"

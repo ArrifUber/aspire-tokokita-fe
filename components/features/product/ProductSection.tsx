@@ -38,14 +38,14 @@ export default function ProductSection() {
 
   // 4. Client-side pagination untuk memotong data per halaman
   const { currentData, pagination } = usePagination({
-    data: products,
+    data:  products,
     rowsPerPage: 5,
     itemLabel: "produk",
   });
 
   const CategoriesList = [
     { key: "all", textValue: "Semua Kategori" },
-    ...categoryList,
+    ...categoryList
   ];
 
   const StatusList = createList([
