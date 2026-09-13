@@ -90,7 +90,7 @@ export function ReusableTable<T extends object>({
               <Table.Row
                 key={rowIndex}
                 className={
-                  "*:bg-surface-tertiary hover:*:bg-surface-secondary *:border-y *:border-surface-border"
+                  "*:bg-surface-secondary hover:*:bg-surface-tertiary *:border-y *:border-surface-border"
                 }
               >
                 {columns.map((col) => (
@@ -108,7 +108,7 @@ export function ReusableTable<T extends object>({
         </Table.Content>
       </Table.ResizableContainer>
       {pagination && (
-        <Table.Footer className="bg-surface-secondary border-t">
+        <Table.Footer className="bg-surface-tertiary border-t">
           <Pagination size="sm" aria-label="Navigasi Tabel">
             <Pagination.Summary className="text-black">
               Manampilkan {pagination.start} - {pagination.end} dari{" "}

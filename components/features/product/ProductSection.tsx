@@ -36,6 +36,8 @@ export default function ProductSection() {
   const { products, isLoading, refetch } = useGetAllProduct(queryParams);
   const { categoryList } = useGetAllCategory();
 
+  console.log(products)
+
   // 4. Client-side pagination untuk memotong data per halaman
   const { currentData, pagination } = usePagination({
     data:  products,
@@ -55,7 +57,7 @@ export default function ProductSection() {
   ]);
 
   return (
-    <div className="flex flex-col gap-6 bg-surface rounded-2xl p-6 shadow border">
+    <div className="flex flex-col gap-6 bg-white rounded-2xl p-6 shadow border">
       <div className="flex flex-col bg-surface-tertiary border border-surface-border rounded-xl overflow-hidden">
         <div id="filter" className="flex gap-4 items-center p-6 w-full">
           {/* Input Search */}

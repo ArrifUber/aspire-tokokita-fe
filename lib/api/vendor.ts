@@ -1,4 +1,4 @@
-import {  UpdateVendorRequest, Vendor, VendorFormData } from "@/types/api/vendor.types";
+import {  UpdateVendorRequest, Vendor, VendorDetailResponse, VendorFormData } from "@/types/api/vendor.types";
 import { apiClient } from "./client";
 import { ApiResponse } from "@/types/api/base.types";
 
@@ -6,8 +6,8 @@ export async function getAllVendor(): Promise<Vendor[]> {
     const res = await apiClient.get<ApiResponse<Vendor[]>>("/vendor")
     return res.data.data
 }
-export async function getVendorById(id: string): Promise<Vendor> {
-  const res = await apiClient.get<ApiResponse<Vendor>>(
+export async function getVendorById(id: string): Promise<VendorDetailResponse> {
+  const res = await apiClient.get<ApiResponse<VendorDetailResponse>>(
     `/vendor/${id}`
   );
   return res.data.data;

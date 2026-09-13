@@ -43,7 +43,7 @@ export default function ActionVendorButton({ id }: Props) {
 
   const handleActionModal = () => {
     setTimeout(() => {
-      setIsModalOpen(true);
+      router.push(`/vendor/detail/${id}`)
     }, 100);
   };
 

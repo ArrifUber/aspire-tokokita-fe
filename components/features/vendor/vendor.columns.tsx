@@ -10,10 +10,10 @@ export const vendorColumns: ColumnDef<Vendor>[] = [
     label: "Supplier",
     renderCell: (row) => (
       <div className="flex gap-2 items-center">
-        <div className="w-8 h-8 flex justify-center items-center rounded-full bg-gray-200">
+        <div className="min-w-8 min-h-8 flex justify-center items-center rounded-full bg-gray-200">
           {row.name[0]}
         </div>
-        <p className="font-semibold text-gray-900">{row.name}</p>
+        <p className="font-semibold text-gray-900 truncate">{row.name}</p>
       </div>
     ),
     minWidth: 200

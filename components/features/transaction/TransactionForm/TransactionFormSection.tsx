@@ -8,7 +8,6 @@ import { useCreateTransaction } from "@/hooks/transaction/useCreateTransaction";
 import { CreateTransactionReq } from "@/types/api/transaction.types";
 import { Product } from "@/types/api/product.types";
 
-import { CustomerInfoCard } from "./CustomerInfoCard";
 import { PaymentSummaryCard } from "./PaymentSummaryCard";
 import { CartItem, PaymentMethodOption } from "@/types/transactions/transaction-form.types";
 import { calculateTransactionTotals } from "@/lib/transactions/calculateTransactionTotal";
@@ -55,7 +54,6 @@ export default function TransactionFormSection() {
           productId: product.id!,
           code: product.code,
           name: product.name,
-          buyPrice: product.buyPrice,
           sellPrice: product.sellPrice,
           quantity: 1,
           stock: product.stock,
@@ -143,35 +141,34 @@ export default function TransactionFormSection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
       <div className="lg:col-span-2 flex flex-col gap-5">
-        <CustomerInfoCard customerName={customerName} onChangeCustomerName={setCustomerName} />
-        <ProductListCard
-          products={products}
-          isLoadingProducts={isLoadingProducts}
-          cartItems={cartItems}
-          onAddProduct={addProductToCart}
-          onIncreaseQuantity={increaseQuantity}
-          onDecreaseQuantity={decreaseQuantity}
-          onRemoveItem={removeItem}
-        />
+        {/* <CustomerInfoCard customerName={customerName} onChangeCustomerName={setCustomerName} /> */}
+  <ProductListCard
+    products={products}
+    isLoadingProducts={isLoadingProducts}
+    cartItems={cartItems}
+    onAddProduct={addProductToCart}
+  />
       </div>
 
       <div className="flex flex-col gap-5">
-        <PaymentSummaryCard
-          subtotal={subtotal}
-          discount={discount}
-          onChangeDiscount={setDiscount}
-          totalPrice={totalPrice}
-          paymentMethod={paymentMethod}
-          onChangePaymentMethod={setPaymentMethod}
-          paymentAmount={paymentAmount}
-          onChangePaymentAmount={setPaymentAmount}
-          changeAmount={changeAmount}
-          isSubmitting={isSubmitting}
-          errorMessage={formError ?? submitError}
-          isSuccess={isSuccess}
-          onSubmit={handleSubmit}
-          onCancel={resetForm}
-        />
+  <PaymentSummaryCard
+    cartItems={cartItems}
+    onIncreaseQuantity={increaseQuantity}
+    onDecreaseQuantity={decreaseQuantity}
+    onRemoveItem={removeItem}
+    subtotal={subtotal}
+    totalPrice={totalPrice}
+    paymentMethod={paymentMethod}
+    onChangePaymentMethod={setPaymentMethod}
+    paymentAmount={paymentAmount}
+    onChangePaymentAmount={setPaymentAmount}
+    changeAmount={changeAmount}
+    isSubmitting={isSubmitting}
+    errorMessage={formError ?? submitError}
+    isSuccess={isSuccess}
+    onSubmit={handleSubmit}
+    onCancel={resetForm}
+  />
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ import { useUploadFile } from "@/hooks/file/useUploadFile";
 import { useGetAllVendor } from "@/hooks/vendor/useGetAllVendor";
 import KonsinyasiField from "./KonsinyasiField";
 
-const IDR_FORMAT_OPTIONS: Intl.NumberFormatOptions = {
+export const IDR_FORMAT_OPTIONS: Intl.NumberFormatOptions = {
   currency: "IDR",
   currencyDisplay: "narrowSymbol",
   style: "currency",

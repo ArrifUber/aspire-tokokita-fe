@@ -122,7 +122,7 @@ export const productColumns: ColumnDef<Product>[] = [
   {
     key: "komisi",
     label: "Komisi Toko",
-    renderCell: (row) => <p>{(row.commissionPercent)}%</p>,
+    renderCell: (row) => <p>{Math.round((row.commissionPercent) * 100)}%</p>,
   },
   {
     key: "isActive",
